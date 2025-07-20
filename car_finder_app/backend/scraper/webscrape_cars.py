@@ -1,5 +1,4 @@
 # webscrape_cars.py
-import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -9,6 +8,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from fake_useragent import UserAgent
 import random
+from security import safe_requests
 
 # Configure browser with advanced settings
 def setup_driver():
@@ -41,7 +41,7 @@ def make_request(url, max_retries=3):
     for attempt in range(max_retries):
         try:
             time.sleep(random.uniform(1, 3))  # Random delay
-            response = requests.get(url, headers=headers, timeout=15)
+            response = safe_requests.get(url, headers=headers, timeout=15)
             response.raise_for_status()
             return response
         except Exception as e:
