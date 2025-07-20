@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Recognizer</title>
+    <link rel="stylesheet" href="car.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Car Recognizer</h1>
+            <p>Upload a photo of your car to identify its make and model</p>
+        </header>
+        
+        <main>
+            <div class="upload-area" id="uploadArea">
+                <div class="icon">🚗</div>
+                <h2>Drag & Drop Your Car Photo</h2>
+                <p>or click to browse files</p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <img id="preview" alt="Preview">
+            </div>
+            
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Analyzing your car...</p>
+            </div>
+            
+            <button id="analyzeBtn" disabled>
+                <span>Analyze Car</span>
+            </button>
+        </main>
+        
+        <footer>
+            <p>Your results will appear here soon</p>
+        </footer>
+    </div>
+
+    <script src="car.js"></script>
+</body>
+</html>

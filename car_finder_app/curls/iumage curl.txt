@@ -1,0 +1,25 @@
+curl -X POST https://gemma3-service-800232544942.europe-west4.run.app/v1/chat/completions \
+  -H "Authorization: Bearer AIzaSyD2-PVdRr7qNSyc1r7HEekltm09CwpMcIQ" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemma3:4b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Respond ONLY in this exact JSON format: {\"simple_vehicle_model\": \"BMW\"|\"\", \"full_vehicle_model\": \"BMWxxxx\"|\"\"}. If no vehicle, use empty strings."
+      },
+      {
+        "role": "user",
+        "content": [
+          {"type": "text", "text": "Identify vehicle"},
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/jpeg;base64,'$(base64 -w 0 car_horizontal.jfif)'"
+            }
+          }
+        ]
+      }
+    ],
+    "response_format": { "type": "json_object" }
+  }'
