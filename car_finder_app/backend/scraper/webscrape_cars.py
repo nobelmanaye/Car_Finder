@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from fake_useragent import UserAgent
-import random
+import secrets
 
 # Global configuration
 HEADERS = {
@@ -52,7 +52,7 @@ def make_request(url):
     
     for attempt in range(MAX_RETRIES):
         try:
-            time.sleep(random.uniform(*REQUEST_DELAY))
+            time.sleep(secrets.SystemRandom().uniform(*REQUEST_DELAY))
             response = requests.get(url, headers=headers, timeout=15)
             response.raise_for_status()
             return response
@@ -97,7 +97,7 @@ def search_autotrader(make, model=None):
             url += f"/{model}"
             
         driver.get(url)
-        time.sleep(random.uniform(2, 4))
+        time.sleep(secrets.SystemRandom().uniform(2, 4))
         
         link_element = driver.find_element("css selector", "a[href*='/cars-for-sale/vehicle']")
         return {

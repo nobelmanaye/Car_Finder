@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import time
 from concurrent.futures import ThreadPoolExecutor
 from fake_useragent import UserAgent
-import random
+import secrets
 
 # Configure browser with advanced settings
 def setup_driver():
@@ -40,7 +40,7 @@ def make_request(url, max_retries=3):
     
     for attempt in range(max_retries):
         try:
-            time.sleep(random.uniform(1, 3))  # Random delay
+            time.sleep(secrets.SystemRandom().uniform(1, 3))  # Random delay
             response = requests.get(url, headers=headers, timeout=15)
             response.raise_for_status()
             return response
@@ -61,7 +61,7 @@ def search_autotrader(make, model=None):
             url += f"/{model}"
             
         driver.get(url)
-        time.sleep(random.uniform(2, 4))
+        time.sleep(secrets.SystemRandom().uniform(2, 4))
         
         link_element = driver.find_element("css selector", "a[href*='/cars-for-sale/vehicle']")
         link = link_element.get_attribute('href')
